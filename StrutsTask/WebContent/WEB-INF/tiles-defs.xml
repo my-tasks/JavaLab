@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+<tiles-definitions>
+	<definition name="category" path="/WEB-INF/jsp/layout.jsp">
+		<put name="action" value="list" type="string" />
+		<put name="body" value="/WEB-INF/jsp/tiles/category.jsp" type="page" />
+	</definition>
+	<definition name="subcategory" path="/WEB-INF/jsp/layout.jsp">
+		<put name="body" value="/WEB-INF/jsp/tiles/subcategory.jsp" type="page" />
+	</definition>
+	<definition name="goods" path="/WEB-INF/jsp/layout.jsp">
+		<put name="body" value="/WEB-INF/jsp/tiles/goods.jsp" type="page" />
+	</definition>
+	<definition name="add" path="/WEB-INF/jsp/layout.jsp">
+		<put name="body" value="/WEB-INF/jsp/tiles/add.jsp" type="page" />
+	</definition>
+	<definition name="error" path="/WEB-INF/jsp/layout.jsp">
+		<put name="body" value="/WEB-INF/jsp/tiles/error.jsp" type="page" />
+	</definition>
+	<definition name="empty" path="/WEB-INF/jsp/tiles/empty.jsp" />
+</tiles-definitions>

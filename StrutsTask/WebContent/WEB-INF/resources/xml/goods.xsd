@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="urn:shopapp:goods" xmlns="urn:shopapp:goods"
+	elementFormDefault="qualified">
+	<xs:element name="categories" type="Categories" />
+	<xs:complexType name="Categories">
+		<xs:sequence>
+			<xs:element name="category" type="Category" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Category">
+		<xs:sequence>
+			<xs:element name="subcategory" type="Subcategory"
+				minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+	<xs:complexType name="Subcategory">
+		<xs:sequence>
+			<xs:element name="goods" type="Goods" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+	<xs:complexType name="Goods">
+		<xs:sequence>
+			<xs:element name="producer" type="xs:string" />
+			<xs:element name="model">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[а-яА-яa-zA-Z]{2}[0-9]{3}" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="date-of-issue">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern
+							value="(((0)[1-9]|[1,2][0-9]|(3)[0-1])-((0)[1,3,5,7,8]|(1)[0,2])-((20)[0-9][0-9]))|(((0)[1-9]|[1,2][0-9]|(30))-((0)[4,6,9]|(11))-((20)[0-9][0-9]))|(((0)[1-9]|[1,2][0-9])-(02)-((20)[0-9][0-9]))" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="color" type="Colors" />
+			<xs:choice>
+				<xs:element name="not-in-stock" type="xs:boolean"
+					minOccurs="0" maxOccurs="1" />
+				<xs:element name="price" type="xs:positiveInteger"
+					minOccurs="0" maxOccurs="1" />
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+
+
+	<xs:simpleType name="Colors">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="black" />
+			<xs:enumeration value="white" />
+			<xs:enumeration value="gray" />
+			<xs:enumeration value="brown" />
+			<xs:enumeration value="yellow" />
+			<xs:enumeration value="red" />
+			<xs:enumeration value="green" />
+			<xs:enumeration value="blue" />
+			<xs:enumeration value="darkblue" />
+			<xs:enumeration value="purple" />
+			<xs:enumeration value="pink" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

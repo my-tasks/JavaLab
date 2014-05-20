@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<categories xmlns="urn:shopapp:goods" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:shopapp:goods goods.xsd">
+	<category name="Женская одежда">
+		<subcategory name="Верхняя одежда">
+			<goods name="Пальто">
+				<producer>Colins</producer>
+				<model>ФА101</model>
+				<date-of-issue>01-01-2000</date-of-issue>
+				<color>black</color>
+				<price>120</price>
+			</goods>
+			<goods name="Куртка">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>white</color>
+				<not-in-stock>true</not-in-stock>
+			</goods>
+		</subcategory>
+		<subcategory name="Брюки, джинсы">
+			<goods name="Джинсы">
+				<producer>Colins</producer>
+				<model>AA101</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>black</color>
+				<not-in-stock>true</not-in-stock>
+			</goods>
+		</subcategory>
+	</category>
+</categories>
