@@ -707,7 +707,6 @@ public class Element extends Content implements Parent {
 		if (text != null) {
 			addContent(new Text(text));
 		}
-		System.out.println("Txt is set to Element "+this.name+" = ["+text+"]");
 	}
 
 	/**
@@ -1588,7 +1587,6 @@ public class Element extends Content implements Parent {
 	 * @return list of child <code>Element</code> objects for this element
 	 */
 	public List<Element> getChildren() {
-		System.out.println(" <<< get Children: ");
 		return content.getView(new ElementFilter());
 	}
 

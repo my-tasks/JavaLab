@@ -38,13 +38,13 @@
 	<action-mappings>
 
 		<action path="/list" type="com.epam.shopapp.action.ProductAction"
-			name="productForm" validate="false" scope="request" parameter="method">
+			name="productForm" validate="false" scope="session" parameter="method">
 		</action>
 		<action path="/update" type="com.epam.shopapp.action.ProductAction"
-			name="productForm" validate="false" input="add" scope="request"
+			name="productForm" validate="false" input="add" scope="session"
 			parameter="method">
 		</action>
-		<action path="/save" type="com.epam.shopapp.action.ProductAction"
+		<action path="/add" type="com.epam.shopapp.action.ProductAction"
 			name="productForm" validate="true" input="add" scope="request"
 			parameter="method">
 		</action>

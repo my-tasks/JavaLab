@@ -488,7 +488,6 @@ public class Attribute extends CloneBase
 		}
 		this.value = value;
 		specified = true;
-//		System.out.println("Txt is set to Attribute "+this.name+" = ["+value+"]");
 	}
 
 	/**

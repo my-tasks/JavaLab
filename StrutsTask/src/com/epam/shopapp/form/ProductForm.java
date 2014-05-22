@@ -7,6 +7,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.jdom2.Document;
+import org.jdom2.Element;
 
 import com.epam.shopapp.model.Product;
 import com.epam.shopapp.resources.Constants;
@@ -24,13 +25,12 @@ public final class ProductForm extends ActionForm {
 		super();
 		System.out.println(">>>>>  +++ NEW FORM +++  <<<<<");
 	}
+	
 	public Document getDocument() {
-		 System.out.println(" <<< Get document: <<< " + document);
 		return document;
 	}
 
 	public void setDocument(Document document) {
-		System.out.println(" >>> Set Document:   >>>" + document);
 		this.document = document;
 	}
 

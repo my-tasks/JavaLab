@@ -22,6 +22,7 @@ import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionRedirect;
 import org.apache.struts.actions.DispatchAction;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
@@ -43,6 +44,7 @@ public final class ProductAction extends DispatchAction {
 	private final String SHOW_PRODUCTS = "showProducts";
 	private final String ADD_PRODUCT = "addProduct";
 	private final String ERROR = "error";
+	private final String SHOW_PRODUCTS_REDIRECT = "/list.do?method=showProducts&categoryIndex=%d&subcategoryIndex=%d";
 	private Templates addProductTemplates;
 	private String filePath = ContextPathKeeper.getContextPath()
 			+ ContextPathKeeper.getGoodsFilePath();
@@ -52,9 +54,7 @@ public final class ProductAction extends DispatchAction {
 		super();
 		ShopFileLocker.getReadLock().lock();
 		try {
-			System.out.println("====>   START:  initializing ");
 			document = new SAXBuilder().build(filePath);
-			System.out.println("====>   END:  initializing ");
 		} finally {
 			ShopFileLocker.getReadLock().unlock();
 		}
@@ -73,7 +73,6 @@ public final class ProductAction extends DispatchAction {
 
 	public ActionForward showCategories(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("====>   START:  show Categories ");
 		ProductForm productForm = (ProductForm) form;
 		ShopFileLocker.getReadLock().lock();
 		try {
@@ -81,14 +80,12 @@ public final class ProductAction extends DispatchAction {
 		} finally {
 			ShopFileLocker.getReadLock().unlock();
 		}
-		System.out.println("====>   END:  show Categories ");
 		return (mapping.findForward(SHOW_CATEGORIES));
 	}
 
 	public ActionForward showSubcategories(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
-		System.out.println("====>   START:  show SubCategories ");
 		ProductForm productForm = (ProductForm) form;
 		Integer categoryIndex = productForm.getCategoryIndex();
 		if (categoryIndex != null) {
@@ -103,13 +100,11 @@ public final class ProductAction extends DispatchAction {
 			throw new InvalidParameterException(
 					"Can not find category index parameter");
 		}
-		System.out.println("====>   END:  show SubCategories ");
 		return mapping.findForward(SHOW_SUBCATEGORIES);
 	}
 
 	public ActionForward showProducts(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("====>   START:  show Products ");
 		ProductForm productForm = (ProductForm) form;
 		Integer categoryIndex = productForm.getCategoryIndex();
 		Integer subcategoryIndex = productForm.getSubcategoryIndex();
@@ -126,34 +121,32 @@ public final class ProductAction extends DispatchAction {
 			throw new InvalidParameterException(
 					"Can not find category or subcategory indexes parameters");
 		}
-		System.out.println("====>   END:  show Products ");
 		return mapping.findForward(SHOW_PRODUCTS);
 	}
 
 	public ActionForward update(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws JDOMException, IOException {
-		System.out.println("====>   START:  update Products ");
-		String target = SHOW_PRODUCTS;
 		ProductForm productForm = (ProductForm) form;
 		Document doc = productForm.getDocument();
-		System.out.println(doc);
 		if (doc != null) {
-
-			/*
-			 * ShopFileLocker.getWriteLock().lock(); try { XMLOutputter
-			 * xmlOutputter = new XMLOutputter(); xmlOutputter.output(doc, new
-			 * FileOutputStream(filePath)); } finally {
-			 * ShopFileLocker.getWriteLock().unlock(); }
-			 */
+			ShopFileLocker.getWriteLock().lock();
+			try {
+				XMLOutputter xmlOutputter = new XMLOutputter();
+				xmlOutputter.output(doc, new FileOutputStream(filePath));
+			} finally {
+				ShopFileLocker.getWriteLock().unlock();
+			}
 		} else {
-			target = ERROR;
-			System.out.println("METHOD-ERROR: update: document==null");
-			// TODO бросаем свое исключение
+			return (mapping.findForward(ERROR));
 		}
 		productForm.setDocument(document);
-		System.out.println("====>   END:  update Products ");
-		return (mapping.findForward(target));
+		Integer categoryIndex = productForm.getCategoryIndex();
+		Integer subcategoryIndex = productForm.getSubcategoryIndex();
+		String path = String.format(SHOW_PRODUCTS_REDIRECT, categoryIndex,
+				subcategoryIndex);
+		ActionRedirect actionRedirect = new ActionRedirect(path);
+		return actionRedirect;
 	}
 
 	public ActionForward addProduct(ActionMapping mapping, ActionForm form,
@@ -182,24 +175,9 @@ public final class ProductAction extends DispatchAction {
 		return (mapping.findForward(ADD_PRODUCT));
 	}
 
-	public ActionForward error(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws JDOMException, IOException {
-		System.out.println("ERROR!");
-		return (mapping.findForward(ERROR));
-	}
-
-	public ActionForward error404(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws JDOMException, IOException {
-		System.out.println("ERROR 404");
-		return (mapping.findForward(ERROR));
-	}
-
 	public ActionForward saveProduct(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws JDOMException, IOException {
-		String target = SHOW_PRODUCTS;
 		ProductForm productForm = (ProductForm) form;
 		Integer categoryIndex = productForm.getCategoryIndex();
 		Integer subcategoryIndex = productForm.getSubcategoryIndex();
@@ -225,8 +203,8 @@ public final class ProductAction extends DispatchAction {
 					ShopFileLocker.getWriteLock().unlock();
 				}
 			} catch (TransformerException ex) {
-				target = ERROR;
 				logger.error(ex.getMessage());
+				return mapping.findForward(ERROR);
 			}
 		}
 		ShopFileLocker.getReadLock().lock();
@@ -235,7 +213,24 @@ public final class ProductAction extends DispatchAction {
 		} finally {
 			ShopFileLocker.getReadLock().unlock();
 		}
-		return mapping.findForward(target);
+		String path = String.format(SHOW_PRODUCTS_REDIRECT, categoryIndex,
+				subcategoryIndex);
+		ActionRedirect actionRedirect = new ActionRedirect(path);
+		return actionRedirect;
+	}
+
+	public ActionForward error(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws JDOMException, IOException {
+		System.out.println("ERROR!");
+		return (mapping.findForward(ERROR));
+	}
+
+	public ActionForward error404(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws JDOMException, IOException {
+		System.out.println("ERROR 404");
+		return (mapping.findForward(ERROR));
 	}
 
 	public String getCategoryName(int categoryIndex) {

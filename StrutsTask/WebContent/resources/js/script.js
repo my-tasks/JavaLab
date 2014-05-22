@@ -6,12 +6,32 @@ function set(field, value) {
 		document.getElementById(field).value = value;
 	}
 }
-function changePriceTD(num) {
+function changePriceTD(num, categoryIndex, subcategoryIndex) {
 	var id = "priceTD" + num;
 	if (document.getElementById("cbox" + num).checked) {
 		document.getElementById(id).innerHTML = "<div class='not-in-stock'>NOT IN STOCK</div>";
 	} else {
-		document.getElementById(id).innerHTML = "<input type='text' name='dd' size='10' />";
+		var hiddenPriceId = "hiddenPrice" + num;
+		var hiddenPriceTD = document.getElementById(hiddenPriceId);
+		if (hiddenPriceTD != null) {
+			var value = hiddenPriceTD.value.toString();
+			document.getElementById(id).innerHTML = "<input type='text' name='document.rootElement.children["
+					+ categoryIndex
+					+ "].children["
+					+ subcategoryIndex
+					+ "].children["
+					+ num
+					+ "].child(price).text' value='"
+					+ value + "' size='10' id='price" + num + "'/>";
+		} else{
+			document.getElementById(id).innerHTML = "<input type='text' name='document.rootElement.children["
+				+ categoryIndex
+				+ "].children["
+				+ subcategoryIndex
+				+ "].children["
+				+ num
+				+ "].child(price).text' size='10' id='price" + num + "'/>";
+		}
 	}
 }
 
@@ -70,8 +90,9 @@ function validateProductForm() {
 	if (model.length == 0) {
 		document.getElementById("err_model").innerHTML = fill;
 		valid = false;
-	} else if (model.length>5||model
-			.match('[\u0430-\u044F\u0410-\u044Fa-zA-Z][\u0430-\u044F\u0410-\u044Fa-zA-Z][0-9][0-9][0-9]') == null) {
+	} else if (model.length > 5
+			|| model
+					.match('[\u0430-\u044F\u0410-\u044Fa-zA-Z][\u0430-\u044F\u0410-\u044Fa-zA-Z][0-9][0-9][0-9]') == null) {
 		document.getElementById("err_model").innerHTML = "Wrong model format. Must match: llDDD";
 		valid = false;
 	} else {
@@ -88,8 +109,9 @@ function validateProductForm() {
 	if (date.length == 0) {
 		document.getElementById("err_date").innerHTML = fill;
 		valid = false;
-	} else if (date.length>10||date
-			.match('(((0)[1-9]|[1,2][0-9]|(3)[0-1])-((0)[1,3,5,7,8]|(1)[0,2])-((20)[0-9][0-9]))|(((0)[1-9]|[1,2][0-9]|(30))-((0)[4,6,9]|(11))-((20)[0-9][0-9]))|(((0)[1-9]|[1,2][0-9])-(02)-((20)[0-9][0-9]))') == null) {
+	} else if (date.length > 10
+			|| date
+					.match('(((0)[1-9]|[1,2][0-9]|(3)[0-1])-((0)[1,3,5,7,8]|(1)[0,2])-((20)[0-9][0-9]))|(((0)[1-9]|[1,2][0-9]|(30))-((0)[4,6,9]|(11))-((20)[0-9][0-9]))|(((0)[1-9]|[1,2][0-9])-(02)-((20)[0-9][0-9]))') == null) {
 		document.getElementById("err_date").innerHTML = "Wrong date format. Must match: dd-MM-yyyy";
 		valid = false;
 	} else {
@@ -107,7 +129,7 @@ function validateProductForm() {
 		} else {
 			document.getElementById("err_price").innerHTML = '';
 		}
-	} else{
+	} else {
 		document.getElementById("err_price").innerHTML = "";
 	}
 	return valid;

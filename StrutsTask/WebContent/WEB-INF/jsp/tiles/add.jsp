@@ -7,9 +7,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<html:form action="/save" method="post" onsubmit="return validateProductForm()">
-	<input type="hidden" name="<%=org.apache.struts.taglib.html.Constants.TOKEN_KEY%>"
-		value="<bean:write name="<%=org.apache.struts.Globals.TRANSACTION_TOKEN_KEY%>"/>">
+<html:form action="/add" method="post" onsubmit="return validateProductForm()">
+<%-- 	<input type="hidden" name="<%=org.apache.struts.taglib.html.Constants.TOKEN_KEY%>" --%>
+<%-- 		value="<bean:write name="<%=org.apache.struts.Globals.TRANSACTION_TOKEN_KEY%>"/>"> --%>
 	<html:hidden property="method" styleId="method" value="saveProduct" />
 	<html:hidden property="categoryIndex" value="${productForm.categoryIndex}"/>
 	<html:hidden property="subcategoryIndex" value="${productForm.subcategoryIndex}"/>

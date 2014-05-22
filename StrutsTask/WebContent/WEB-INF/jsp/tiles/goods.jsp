@@ -7,7 +7,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<html:form action="/list" method="post">
+<html:form action="/update" method="post">
+<%-- 	<input type="hidden" name="<%=org.apache.struts.taglib.html.Constants.TOKEN_KEY%>" --%>
+<%-- 		value="<bean:write name="<%=org.apache.struts.Globals.TRANSACTION_TOKEN_KEY%>"/>"> --%>
 	<html:hidden property="method" styleId="method" value="update"/>
 	<html:hidden property="categoryIndex" styleId="categoryIndex" value="${productForm.categoryIndex}"/>
 	<html:hidden property="subcategoryIndex" styleId="subcategoryIndex"  value="${productForm.subcategoryIndex}"/>
@@ -28,19 +30,19 @@
 		<nested:iterate property="children[${productForm.subcategoryIndex}].children" indexId="ind">
 			<tr>
 				<td class="goods" title="<bean:message key='product.name'/>">
-					<nested:text indexed="true" property="attributes[0].value" size="10" styleId="name${ind}"/>
+					<nested:text property="attributes[0].value" size="10" styleId="name${ind}"/>
 				</td>
 				<td class="goods" title="<bean:message key='product.producer'/>">
-					<nested:text indexed="true" property="child(producer).text" size="10" styleId="provider${ind}"/>
+					<nested:text property="child(producer).text" size="10" styleId="provider${ind}"/>
 				</td>
 				<td class="goods" title="<bean:message key='product.model'/>">
-					<nested:text indexed="true" property="child(model).text" size="10" styleId="model${ind}"/>
+					<nested:text property="child(model).text" size="10" styleId="model${ind}"/>
 				</td>
 				<td class="goods" title="<bean:message key='product.date'/>">
-					<nested:text indexed="true" property="child(date-of-issue).text" size="10" styleId="date${ind}"/>
+					<nested:text property="child(date-of-issue).text" size="10" styleId="date${ind}"/>
 				</td>
 				<td class="goods" title="<bean:message key='product.color'/>">
-					<nested:text indexed="true" property="child(color).text" size="10" styleId="price${ind}"/>
+					<nested:text property="child(color).text" size="10" styleId="color${ind}"/>
 				</td>
 				<nested:empty property="child(price)">
 					<td class="price" title="<bean:message key='product.not.in.stock'/>" id="priceTD${ind}">
@@ -51,18 +53,20 @@
 				</nested:empty>
 				<nested:notEmpty property="child(price)">
 					<td class="price" title='<bean:message key='product.price'/>' id="priceTD${ind}">
-						<nested:text indexed="true" property="child(price).text" size="10" />
+						<nested:text property="child(price).text" size="10"  styleId="price${ind}"/>
 					</td>
 				</nested:notEmpty>
 				<nested:empty property="child(price)">
 					<td class="notInStock">
-						<input type="checkbox" checked="checked" onclick="changePriceTD(${ind})" id="cbox${ind}"/>
+						<input type="checkbox" checked="checked" onclick="changePriceTD(${ind}, ${productForm.categoryIndex}, ${productForm.subcategoryIndex})" id="cbox${ind}"/>
 <%-- 						<nested:checkbox property="child(not-in-stock)" value="true" onclick="changePriceTD(${ind})" styleId="cbox${ind}"/> --%>
 					</td>
 				</nested:empty>
 				<nested:notEmpty property="child(price)">
 					<td class="notInStock">
-						<input type="checkbox" onclick="changePriceTD(${ind})" id="cbox${ind}"/>
+						<nested:define id="hiddenPrice" property="child(price).text"/> 
+						<input type="hidden" id="hiddenPrice${ind}" value="${hiddenPrice}"/>
+						<input type="checkbox" onclick="changePriceTD(${ind}, ${productForm.categoryIndex}, ${productForm.subcategoryIndex})" id="cbox${ind}"/>
 <%-- 						<nested:checkbox property="child(not-in-stock)"  value="true" onclick="changePriceTD(${ind})" styleId="cbox${ind}"/> --%>
 					</td>
 				</nested:notEmpty>
@@ -76,7 +80,7 @@
 				<html:submit styleClass="button">
 					<bean:message key='button.save'/>
 				</html:submit>
-				<html:button styleClass="button" property="" onclick="document.location='./update.do?method=addProduct&categoryIndex=${productForm.categoryIndex}&subcategoryIndex=${productForm.subcategoryIndex}'">
+				<html:button styleClass="button" property="" onclick="document.location='./add.do?method=addProduct&categoryIndex=${productForm.categoryIndex}&subcategoryIndex=${productForm.subcategoryIndex}'">
 					<bean:message key='button.add'/>
 				</html:button>
 			</td>
