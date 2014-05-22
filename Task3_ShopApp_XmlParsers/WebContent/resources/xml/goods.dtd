@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ENTITY % Colors "(black|white|gray|brown|red|blue|yellow|green|purple|pink)">
+
+<!ELEMENT categories (category+)>
+
+<!ELEMENT category (subcategory+)>
+<!ATTLIST category name CDATA #REQUIRED>
+
+<!ELEMENT subcategory (goods*)>
+<!ATTLIST subcategory name CDATA #REQUIRED>
+
+<!ELEMENT goods (producer, model, date-of-issue, color, (not-in-stock | price))>
+<!ATTLIST goods name CDATA #REQUIRED>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT producer (#PCDATA)>
+<!ELEMENT model (#PCDATA)>
+<!ELEMENT date-of-issue (#PCDATA)>
+<!ELEMENT color (#PCDATA)>
+<!ELEMENT not-in-stock (#PCDATA)>
+<!ELEMENT price (#PCDATA)>

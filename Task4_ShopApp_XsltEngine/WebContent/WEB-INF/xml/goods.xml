@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<categories xmlns="urn:shopapp:goods" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:shopapp:goods goods.xsd">
+	<category name="Женская одежда">
+		<subcategory name="Верхняя одежда">
+			<goods name="Пальто">
+				<producer>Colins</producer>
+				<model>ФА101</model>
+				<date-of-issue>01-01-2000</date-of-issue>
+				<color>black</color>
+				<price>120</price>
+			</goods>
+			<goods name="Пальто">
+				<producer>Colin's</producer>
+				<model>AA101</model>
+				<date-of-issue>01-02-2000</date-of-issue>
+				<color>brown</color>
+				<not-in-stock>true</not-in-stock>
+			</goods>
+			<goods name="Пальто">
+				<producer>Colin's</producer>
+				<model>AA101</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>white</color>
+				<price>120</price>
+			</goods>
+			<goods name="Куртка">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>brown</color>
+				<price>110</price>
+			</goods>
+			<goods name="Куртка">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>white</color>
+				<not-in-stock>true</not-in-stock>
+			</goods>
+		</subcategory>
+		<subcategory name="Брюки, джинсы">
+			<goods name="Джинсы">
+				<producer>Colins</producer>
+				<model>AA101</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>black</color>
+				<not-in-stock>true</not-in-stock>
+			</goods>
+			<goods name="Бриджи">
+				<producer>Colins</producer>
+				<model>BR121</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>brown</color>
+				<price>70</price>
+			</goods>
+			<goods name="Бриджи">
+				<producer>Colins</producer>
+				<model>BR121</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>pink</color>
+				<price>70</price>
+			</goods>
+			<goods name="Джинсы">
+				<producer>Zara</producer>
+				<model>DJ301</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>blue</color>
+				<price>110</price>
+			</goods>
+			<goods name="Джинсы">
+				<producer>Zara</producer>
+				<model>DJ301</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>darkblue</color>
+				<price>110</price>
+			</goods>
+			<goods name="Джинсы">
+				<producer>Zara</producer>
+				<model>DJ301</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>black</color>
+				<price>110</price>
+			</goods>
+			<goods name="Джинсы">
+				<producer>Zara</producer>
+				<model>DJ301</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>white</color>
+				<not-in-stock>true</not-in-stock>
+			</goods>
+			<goods name="Брюки">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>pink</color>
+				<price>110</price>
+			</goods>
+		</subcategory>
+	</category>
+	<category name="Женская обувь">
+		<subcategory name="Ботинки">
+			<goods name="Ботинки осенние">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>black</color>
+				<price>210</price>
+			</goods>
+			<goods name="Ботинки осенние">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>brown</color>
+				<price>210</price>
+			</goods>
+		</subcategory>
+		<subcategory name="Туфли">
+			<goods name="Туфли">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>black</color>
+				<price>250</price>
+			</goods>
+			<goods name="Туфли">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>brown</color>
+				<price>250</price>
+			</goods>
+			<goods name="Туфли">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>gray</color>
+				<price>250</price>
+			</goods>
+			<goods name="Туфли">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>white</color>
+				<price>250</price>
+			</goods>
+		</subcategory>
+	</category>
+	<category name="Аксессуары">
+		<subcategory name="Сумки">
+			<goods name="Сумка">
+				<producer>Colins</producer>
+				<model>ФА101</model>
+				<date-of-issue>01-01-2000</date-of-issue>
+				<color>black</color>
+				<price>120</price>
+			</goods>
+			<goods name="Клатч">
+				<producer>Colin's</producer>
+				<model>AA101</model>
+				<date-of-issue>01-02-2000</date-of-issue>
+				<color>brown</color>
+				<not-in-stock>true</not-in-stock>
+			</goods>
+			<goods name="Сумка">
+				<producer>Colin's</producer>
+				<model>AA101</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>white</color>
+				<price>120</price>
+			</goods>
+		</subcategory>
+		<subcategory name="Ремни">
+			<goods name="Ремень">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>brown</color>
+				<price>110</price>
+			</goods>
+			<goods name="Ремень широкий">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>white</color>
+				<not-in-stock>true</not-in-stock>
+			</goods>
+		</subcategory>
+		<subcategory name="Кошельки">
+			<goods name="Кошелек">
+				<producer>Colins</producer>
+				<model>AA101</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>black</color>
+				<not-in-stock>true</not-in-stock>
+			</goods>
+			<goods name="Кошелек">
+				<producer>Colins</producer>
+				<model>BR121</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>brown</color>
+				<price>70</price>
+			</goods>
+			<goods name="Кошелек">
+				<producer>Colins</producer>
+				<model>BR121</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>pink</color>
+				<price>70</price>
+			</goods>
+			<goods name="Кошелек">
+				<producer>Zara</producer>
+				<model>DJ301</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>blue</color>
+				<price>110</price>
+			</goods>
+			<goods name="Кошелек">
+				<producer>Zara</producer>
+				<model>DJ301</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>darkblue</color>
+				<price>110</price>
+			</goods>
+			<goods name="Кошелек">
+				<producer>Zara</producer>
+				<model>DJ301</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>black</color>
+				<price>110</price>
+			</goods>
+			<goods name="Кошелек">
+				<producer>Zara</producer>
+				<model>DJ301</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>white</color>
+				<not-in-stock>true</not-in-stock>
+			</goods>
+			<goods name="Кошелек">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>pink</color>
+				<price>110</price>
+			</goods>
+		</subcategory>
+	</category>
+	<category name="Мужская одежда">
+		<subcategory name="Верхняя одежда">
+			<goods name="Пальто">
+				<producer>Colins</producer>
+				<model>AB101</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>green</color>
+				<price>170</price>
+			</goods>
+			<goods name="Пальто">
+				<producer>Colins</producer>
+				<model>AB101</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>brown</color>
+				<price>170</price>
+			</goods>
+			<goods name="Пальто">
+				<producer>Colins</producer>
+				<model>AB101</model>
+				<date-of-issue>21-04-2014</date-of-issue>
+				<color>black</color>
+				<price>170</price>
+			</goods>
+			<goods name="Куртка">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>brown</color>
+				<price>110</price>
+			</goods>
+			<goods name="Куртка">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>white</color>
+				<price>110</price>
+			</goods>
+		</subcategory>
+		<subcategory name="Брюки, джинсы">
+			<goods name="Джинсы">
+				<producer>Colins</producer>
+				<model>AA101</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>black</color>
+				<price>70</price>
+			</goods>
+			<goods name="Бриджи">
+				<producer>Colins</producer>
+				<model>BR121</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>brown</color>
+				<price>70</price>
+			</goods>
+			<goods name="Бриджи">
+				<producer>Colins</producer>
+				<model>BR121</model>
+				<date-of-issue>01-02-2014</date-of-issue>
+				<color>pink</color>
+				<price>70</price>
+			</goods>
+			<goods name="Джинсы">
+				<producer>Zara</producer>
+				<model>DJ301</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>blue</color>
+				<price>110</price>
+			</goods>
+			<goods name="Джинсы">
+				<producer>Zara</producer>
+				<model>DJ301</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>darkblue</color>
+				<price>110</price>
+			</goods>
+			<goods name="Джинсы">
+				<producer>Zara</producer>
+				<model>DJ301</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>black</color>
+				<price>110</price>
+			</goods>
+			<goods name="Джинсы">
+				<producer>Zara</producer>
+				<model>DJ301</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>white</color>
+				<price>110</price>
+			</goods>
+			<goods name="Брюки">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>pink</color>
+				<price>110</price>
+			</goods>
+		</subcategory>
+	</category>
+	<category name="Мужская обувь">
+		<subcategory name="Ботинки">
+			<goods name="Ботинки осенние">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>black</color>
+				<price>210</price>
+			</goods>
+				<goods name="Ботинки осенние">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>brown</color>
+				<price>210</price>
+			</goods>
+		</subcategory>
+		<subcategory name="Туфли">
+			<goods name="Туфли">
+				<producer>Zara</producer>
+				<model>lk101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>black</color>
+				<price>180</price>
+			</goods>
+			<goods name="Туфли">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>brown</color>
+				<price>180</price>
+			</goods>
+		</subcategory>
+	</category>
+		<category name="Other Goods">
+		<subcategory name="Boots">
+				<goods name="Boots">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>black</color>
+				<price>50</price>
+			</goods>
+			<goods name="Boots">
+				<producer>Zara</producer>
+				<model>LK101</model>
+				<date-of-issue>15-03-2014</date-of-issue>
+				<color>black</color>
+				<price>50</price>
+			</goods>
+		</subcategory>
+	</category>
+</categories>

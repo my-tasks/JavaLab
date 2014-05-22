@@ -1,0 +1,128 @@
+.centered {
+	text-align: center;
+}
+
+.not-in-stock {
+	text-align: left;
+	color: darkred;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.menu {
+	text-align: right;
+	width: 720px;
+}
+
+TABLE {
+	width: 1000px;
+	/* 	border: 2px solid black; */
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+TABLE.list {
+	width: 1000px;
+	/* 	border: 2px solid black; */
+	border-collapse: collapse;
+	margin-top: 20px;
+	margin-left: 30px;
+}
+
+TH {
+	text-align: left;
+	border-bottom: 2px solid #0B3700;
+	padding-left: 10px; padding-top : 10px;
+	padding-bottom: 10px;
+	padding-top: 10px; padding-bottom : 10px;
+	background-color: #ABD7A0;
+}
+
+TR {
+	height: 20px;
+}
+
+TD.7x {
+	width: 1000px;
+}
+
+TD.title {
+	width: 1000px;
+}
+
+TD.category {
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	font-weight: bold;
+	font-size: 20px;
+	width: 200px;
+	font-weight: bold;
+	border-bottom: 1px solid #0B3700;
+}
+
+TD.goods {
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	font-size: 15px;
+	border-bottom: 1px solid #0B3700;
+}
+
+TD {
+	width: 200px;
+	text-align: left;
+}
+
+TD.error {
+	color: red;
+}
+
+H2 {
+	margin-left: 10px;
+	margin-top: 15px;
+	margin-bottom: 0px;
+}
+
+H3 {
+	margin-left: 50px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+a {
+	font-weight: bold;
+	text-decoration: none;
+	color: darkblue;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: orange;
+}
+
+a:active {
+	color: orange;
+}
+
+a.list {
+	font-weight: bold;
+	text-decoration: none;
+	color: black;
+}
+
+a.list:hover {
+	text-decoration: underline;
+	color: #29551E
+}
+
+a.list:active {
+	color: #29551E
+}
+
+#square {
+	border: 1px solid black;
+	width: 30px;
+	height: 10px;
+	background: red;
+}

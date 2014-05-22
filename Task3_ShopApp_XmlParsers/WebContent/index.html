@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Xml parsing example</title>
+<link rel='stylesheet' type='text/css' href='./resources/style.css' />
+</head>
+<script type="text/javascript">
+	function setParser(type) {
+		document.getElementById("parser").value = type;
+		document.forms["form"].submit();
+		
+	}
+</script>
+<body>
+	<div class='centered'>
+		<table>
+			<tr>
+				<td colspan="3"  width='50' class='centered'>
+					<h1>Shop Goods List</h1>
+				</td>
+			</tr>
+			<tr>
+				<td><h1 class='centered'><a href="./dom" onclick="setParser('dom'); return false">Dom</a></h1></td>
+				<td><h1 class='centered'><a href="./sax" onclick="setParser('sax'); return false">Sax</a></h1></td>
+				<td><h1 class='centered'><a href="./stax" onclick="setParser('stax'); return false">Stax</a></h1></td>
+					</tr>
+			<tr>
+			<td colspan='3'>
+			<hr/>
+			<div style="margin-top: 50px; font-size: 40px" class="centered"><a href='./list'>XSL Version</a></div>
+			</td>
+			</tr>
+			<tr>
+				<td colspan='3'><form id="form" action="./parse">
+						<input type="hidden" id="parser" name="parser">
+					</form></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

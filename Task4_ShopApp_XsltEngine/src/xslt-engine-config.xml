@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xslt-engine-configuration xmlns="schema:xslt-engine-config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="schema:xslt-engine-config xslt-engine-config.xsd">
+	<global-resources-locations>
+		<location path="WEB-INF\xsl\" id="default" />
+		<location path="WEB-INF\xml\" id="xmlfiles" />
+	</global-resources-locations>
+	<global-xsl-resources>
+		<xsl-resource id="show.categories" resource-name="show-categories.xsl" />
+		<xsl-resource id="add.goods" resource-name="add-goods.xsl" />
+	</global-xsl-resources>
+	<resources>
+		<xml-resource id="goods" resource-name="goods.xml"
+			global-location="xmlfiles">
+			<xsl-resource id="show.subcategories" resource-name="show-subcategories.xsl" />
+			<xsl-resource id="show.goods" resource-name="show-goods.xsl" />
+			<xsl-resource id="validate.goods" resource-name="validate-goods.xsl" />
+		</xml-resource>
+	</resources>
+	<default-resources xml-resource-id="goods"
+		xsl-resource-id="show.categories" />
+
+	<!-- Constraints for the FormValidator -->
+	<form-constraints>
+		<patterns>
+			<pattern key="model" value="[а-яА-яa-zA-Z]{2}[0-9]{3}" />
+			<pattern key="date"
+				value="(((0)[1-9]|[1,2][0-9]|(3)[0-1])-((0)[1,3,5,7,8]|(1)[0,2])-((20)[0-9][0-9]))|(((0)[1-9]|[1,2][0-9]|(30))-((0)[4,6,9]|(11))-((20)[0-9][0-9]))|(((0)[1-9]|[1,2][0-9])-(02)-((20)[0-9][0-9]))" />
+			<pattern key="price" value="[0-9]+" />
+		</patterns>
+		<enums>
+			<enum key="colors"
+				values="black, white, red, yellow, pink, green, blue, brown, gray, purple,
+				darkblue" />
+			<enum key="example-colors">
+				<value>black</value>
+				<value>white</value>
+				<value>red</value>
+				<value>yellow</value>
+				<value>pink</value>
+				<value>green</value>
+				<value>blue</value>
+				<value>brown</value>
+				<value>gray</value>
+				<value>purple</value>
+				<value>darkblue</value>
+			</enum>
+		</enums>
+	</form-constraints>
+</xslt-engine-configuration>
+
+
+
