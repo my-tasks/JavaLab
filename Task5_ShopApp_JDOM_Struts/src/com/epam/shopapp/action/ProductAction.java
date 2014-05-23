@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.InvalidParameterException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionRedirect;
 import org.apache.struts.actions.DispatchAction;
 import org.jdom2.Document;
+import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.XMLOutputter;
@@ -127,11 +129,27 @@ public final class ProductAction extends DispatchAction {
 	public ActionForward update(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws JDOMException, IOException {
+		System.out.println("update");
 		ProductForm productForm = (ProductForm) form;
+		Integer categoryIndex = productForm.getCategoryIndex();
+		Integer subcategoryIndex = productForm.getSubcategoryIndex();
 		Document doc = productForm.getDocument();
+		Integer[] selected = productForm.getSelectedNotInStock();
 		if (doc != null) {
 			ShopFileLocker.getWriteLock().lock();
 			try {
+				List<Element> products = doc.getRootElement().getChildren()
+						.get(categoryIndex).getChildren().get(subcategoryIndex)
+						.getChildren();
+				for(Element product: products){
+					product.getChildren().get(4).setName(Constants.PRICE);
+				}
+				for(int k: selected){
+					Element elem = 
+					products.get(k).getChildren().get(4);
+					elem.setText("true");
+					elem.setName(Constants.NOT_IN_STOCK);
+				}
 				XMLOutputter xmlOutputter = new XMLOutputter();
 				xmlOutputter.output(doc, new FileOutputStream(filePath));
 			} finally {
@@ -141,8 +159,6 @@ public final class ProductAction extends DispatchAction {
 			return (mapping.findForward(ERROR));
 		}
 		productForm.setDocument(document);
-		Integer categoryIndex = productForm.getCategoryIndex();
-		Integer subcategoryIndex = productForm.getSubcategoryIndex();
 		String path = String.format(SHOW_PRODUCTS_REDIRECT, categoryIndex,
 				subcategoryIndex);
 		ActionRedirect actionRedirect = new ActionRedirect(path);

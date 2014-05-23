@@ -1,5 +1,7 @@
 package com.epam.shopapp.form;
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionErrors;
@@ -20,12 +22,13 @@ public final class ProductForm extends ActionForm {
 	private String categoryName;
 	private Integer subcategoryIndex;
 	private String subcategoryName;
+	private Integer[] selectedNotInStock;
 
-	public ProductForm(){
+	public ProductForm() {
 		super();
 		System.out.println(">>>>>  +++ NEW FORM +++  <<<<<");
 	}
-	
+
 	public Document getDocument() {
 		return document;
 	}
@@ -77,9 +80,19 @@ public final class ProductForm extends ActionForm {
 		this.subcategoryName = subcategoryName;
 	}
 
+
+	public Integer[] getSelectedNotInStock() {
+		return selectedNotInStock;
+	}
+
+	public void setSelectedNotInStock(Integer[] selectedNotInStock) {
+		this.selectedNotInStock = selectedNotInStock;
+	}
+
 	@Override
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		System.out.println(">>>>   FORM RESET   <<<<");
+		selectedNotInStock = new Integer[0];
 	}
 
 	@Override
@@ -103,8 +116,8 @@ public final class ProductForm extends ActionForm {
 			if (newProduct.getDateOfIssue().trim().isEmpty()) {
 				errors.add("date", new ActionMessage("errors.empty.field"));
 			} else if (!FormValidator.isValidDate(newProduct.getDateOfIssue())) {
-				errors.add("date", new ActionMessage(
-						"errors.incorrect.format", Constants.DATE_FORMAT));
+				errors.add("date", new ActionMessage("errors.incorrect.format",
+						Constants.DATE_FORMAT));
 			}
 			if (newProduct.getColor().trim().isEmpty()) {
 				errors.add("color", new ActionMessage("errors.empty.color"));
@@ -115,6 +128,7 @@ public final class ProductForm extends ActionForm {
 				}
 			}
 		}
+		System.out.println(Arrays.toString(selectedNotInStock));
 		return errors;
 	}
 }

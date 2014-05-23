@@ -41,7 +41,7 @@
 			name="productForm" validate="false" scope="session" parameter="method">
 		</action>
 		<action path="/update" type="com.epam.shopapp.action.ProductAction"
-			name="productForm" validate="false" input="add" scope="session"
+			name="productForm" validate="true" input="add" scope="session"
 			parameter="method">
 		</action>
 		<action path="/add" type="com.epam.shopapp.action.ProductAction"

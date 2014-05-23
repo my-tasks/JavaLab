@@ -7,9 +7,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<html:form action="/update" method="post">
-<%-- 	<input type="hidden" name="<%=org.apache.struts.taglib.html.Constants.TOKEN_KEY%>" --%>
-<%-- 		value="<bean:write name="<%=org.apache.struts.Globals.TRANSACTION_TOKEN_KEY%>"/>"> --%>
+<html:form action="/update" method="post" onsubmit="return validateProducts()">
 	<html:hidden property="method" styleId="method" value="update"/>
 	<html:hidden property="categoryIndex" styleId="categoryIndex" value="${productForm.categoryIndex}"/>
 	<html:hidden property="subcategoryIndex" styleId="subcategoryIndex"  value="${productForm.subcategoryIndex}"/>
@@ -27,13 +25,25 @@
 			<th><bean:message key="product.price"/></th>
 			<th><bean:message key="product.not.in.stock"/></th>
 		</tr>
+		<tr>
+			<td colspan="7" class="common_error"><html:errors property="update"/></td>
+		</tr>
 		<nested:iterate property="children[${productForm.subcategoryIndex}].children" indexId="ind">
+			<tr>
+				<td class="error" id="err_name${ind}"></td>
+				<td class="error" id="err_producer${ind}"></td>
+				<td class="error" id="err_model${ind}"></td>
+				<td class="error" id="err_date${ind}"></td>
+				<td class="error" id="err_color${ind}"></td>
+				<td class="error" id="err_price${ind}"></td>
+				<td></td>
+			</tr>
 			<tr>
 				<td class="goods" title="<bean:message key='product.name'/>">
 					<nested:text property="attributes[0].value" size="10" styleId="name${ind}"/>
 				</td>
 				<td class="goods" title="<bean:message key='product.producer'/>">
-					<nested:text property="child(producer).text" size="10" styleId="provider${ind}"/>
+					<nested:text property="child(producer).text" size="10" styleId="producer${ind}"/>
 				</td>
 				<td class="goods" title="<bean:message key='product.model'/>">
 					<nested:text property="child(model).text" size="10" styleId="model${ind}"/>
@@ -44,32 +54,23 @@
 				<td class="goods" title="<bean:message key='product.color'/>">
 					<nested:text property="child(color).text" size="10" styleId="color${ind}"/>
 				</td>
-				<nested:empty property="child(price)">
-					<td class="price" title="<bean:message key='product.not.in.stock'/>" id="priceTD${ind}">
-					<div class="not-in-stock">
+				<td class="goods" title='<bean:message key='product.price'/>' id="priceTD${ind}">
+					<nested:empty property="child(price)">
+						<div class="not-in-stock" id="notInStock${ind}">
 							NOT IN STOCK
-					</div>
-					</td>
-				</nested:empty>
-				<nested:notEmpty property="child(price)">
-					<td class="price" title='<bean:message key='product.price'/>' id="priceTD${ind}">
-						<nested:text property="child(price).text" size="10"  styleId="price${ind}"/>
-					</td>
-				</nested:notEmpty>
-				<nested:empty property="child(price)">
-					<td class="notInStock">
-						<input type="checkbox" checked="checked" onclick="changePriceTD(${ind}, ${productForm.categoryIndex}, ${productForm.subcategoryIndex})" id="cbox${ind}"/>
-<%-- 						<nested:checkbox property="child(not-in-stock)" value="true" onclick="changePriceTD(${ind})" styleId="cbox${ind}"/> --%>
-					</td>
-				</nested:empty>
-				<nested:notEmpty property="child(price)">
-					<td class="notInStock">
-						<nested:define id="hiddenPrice" property="child(price).text"/> 
-						<input type="hidden" id="hiddenPrice${ind}" value="${hiddenPrice}"/>
-						<input type="checkbox" onclick="changePriceTD(${ind}, ${productForm.categoryIndex}, ${productForm.subcategoryIndex})" id="cbox${ind}"/>
-<%-- 						<nested:checkbox property="child(not-in-stock)"  value="true" onclick="changePriceTD(${ind})" styleId="cbox${ind}"/> --%>
-					</td>
-				</nested:notEmpty>
+						</div>
+					</nested:empty>
+					<nested:notEmpty property="child(price)">
+						<nested:text property="children[4].text" size="10"  styleId="price${ind}"/>
+					</nested:notEmpty>
+				</td>
+				<td class="notInStock">
+					<html:multibox name="productForm" property="selectedNotInStock" value="${ind}" onclick="changePriceTD(${ind}, ${productForm.categoryIndex}, ${productForm.subcategoryIndex})" styleId="cbox${ind}"/>
+					<nested:notEmpty property="child(price)">
+					<nested:define id="hiddenPrice" property="child(price).text"/>
+					<input type="hidden" id="hiddenPrice${ind}" value="${hiddenPrice}"/>
+					</nested:notEmpty> 
+				</td>
 			</tr>
 		</nested:iterate>
 		<tr>
@@ -91,3 +92,6 @@
 	</nested:nest>
 	</nested:root>
 </html:form>
+<script type="text/javascript">
+window.onload = setNotInStock();
+</script>
