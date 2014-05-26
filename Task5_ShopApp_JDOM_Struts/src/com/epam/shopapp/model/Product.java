@@ -83,4 +83,12 @@ public class Product {
 		this.notInStock = notInStock;
 	}
 
+	@Override
+	public String toString() {
+		return "Product [category=" + category + ", subcategory=" + subcategory
+				+ ", name=" + name + ", producer=" + producer + ", model="
+				+ model + ", dateOfIssue=" + dateOfIssue + ", color=" + color
+				+ ", price=" + price + ", notInStock=" + notInStock + "]";
+	}
+
 }

@@ -37,7 +37,7 @@ import com.epam.shopapp.form.ProductForm;
 import com.epam.shopapp.model.Product;
 import com.epam.shopapp.resources.Constants;
 import com.epam.shopapp.util.ContextPathKeeper;
-import com.epam.shopapp.util.ShopFileLocker;
+import com.epam.shopapp.util.ReadWriteFileLocker;
 
 public final class ProductAction extends DispatchAction {
 	private static final Logger logger = Logger.getLogger(ProductAction.class);
@@ -54,11 +54,11 @@ public final class ProductAction extends DispatchAction {
 
 	public ProductAction() throws Exception {
 		super();
-		ShopFileLocker.getReadLock().lock();
+		ReadWriteFileLocker.getReadLock().lock();
 		try {
 			document = new SAXBuilder().build(filePath);
 		} finally {
-			ShopFileLocker.getReadLock().unlock();
+			ReadWriteFileLocker.getReadLock().unlock();
 		}
 		try {
 			TransformerFactory factory = TransformerFactory.newInstance();
@@ -76,11 +76,11 @@ public final class ProductAction extends DispatchAction {
 	public ActionForward showCategories(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		ProductForm productForm = (ProductForm) form;
-		ShopFileLocker.getReadLock().lock();
+		ReadWriteFileLocker.getReadLock().lock();
 		try {
 			productForm.setDocument(document);
 		} finally {
-			ShopFileLocker.getReadLock().unlock();
+			ReadWriteFileLocker.getReadLock().unlock();
 		}
 		return (mapping.findForward(SHOW_CATEGORIES));
 	}
@@ -92,11 +92,11 @@ public final class ProductAction extends DispatchAction {
 		Integer categoryIndex = productForm.getCategoryIndex();
 		if (categoryIndex != null) {
 			productForm.setCategoryIndex(categoryIndex);
-			ShopFileLocker.getReadLock().lock();
+			ReadWriteFileLocker.getReadLock().lock();
 			try {
 				productForm.setDocument(document);
 			} finally {
-				ShopFileLocker.getReadLock().unlock();
+				ReadWriteFileLocker.getReadLock().unlock();
 			}
 		} else {
 			throw new InvalidParameterException(
@@ -113,11 +113,11 @@ public final class ProductAction extends DispatchAction {
 		if (categoryIndex != null && subcategoryIndex != null) {
 			productForm.setCategoryIndex(categoryIndex);
 			productForm.setSubcategoryIndex(subcategoryIndex);
-			ShopFileLocker.getReadLock().lock();
+			ReadWriteFileLocker.getReadLock().lock();
 			try {
 				productForm.setDocument(document);
 			} finally {
-				ShopFileLocker.getReadLock().unlock();
+				ReadWriteFileLocker.getReadLock().unlock();
 			}
 		} else {
 			throw new InvalidParameterException(
@@ -129,31 +129,29 @@ public final class ProductAction extends DispatchAction {
 	public ActionForward update(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws JDOMException, IOException {
-		System.out.println("update");
 		ProductForm productForm = (ProductForm) form;
 		Integer categoryIndex = productForm.getCategoryIndex();
 		Integer subcategoryIndex = productForm.getSubcategoryIndex();
 		Document doc = productForm.getDocument();
 		Integer[] selected = productForm.getSelectedNotInStock();
 		if (doc != null) {
-			ShopFileLocker.getWriteLock().lock();
+			ReadWriteFileLocker.getWriteLock().lock();
 			try {
 				List<Element> products = doc.getRootElement().getChildren()
 						.get(categoryIndex).getChildren().get(subcategoryIndex)
 						.getChildren();
-				for(Element product: products){
+				for (Element product : products) {
 					product.getChildren().get(4).setName(Constants.PRICE);
 				}
-				for(int k: selected){
-					Element elem = 
-					products.get(k).getChildren().get(4);
+				for (int k : selected) {
+					Element elem = products.get(k).getChildren().get(4);
 					elem.setText("true");
 					elem.setName(Constants.NOT_IN_STOCK);
 				}
 				XMLOutputter xmlOutputter = new XMLOutputter();
 				xmlOutputter.output(doc, new FileOutputStream(filePath));
 			} finally {
-				ShopFileLocker.getWriteLock().unlock();
+				ReadWriteFileLocker.getWriteLock().unlock();
 			}
 		} else {
 			return (mapping.findForward(ERROR));
@@ -170,10 +168,10 @@ public final class ProductAction extends DispatchAction {
 			throws JDOMException, IOException {
 		ProductForm productForm = (ProductForm) form;
 		productForm.setNewProduct(new Product());
-		ShopFileLocker.getReadLock().lock();
 		Integer categoryIndex = productForm.getCategoryIndex();
 		Integer subcategoryIndex = productForm.getSubcategoryIndex();
 		if (categoryIndex != null && subcategoryIndex != null) {
+			ReadWriteFileLocker.getReadLock().lock();
 			try {
 				productForm.setCategoryIndex(categoryIndex);
 				productForm.setSubcategoryIndex(subcategoryIndex);
@@ -181,7 +179,7 @@ public final class ProductAction extends DispatchAction {
 				productForm.setSubcategoryName(getSubcategoryName(
 						categoryIndex, subcategoryIndex));
 			} finally {
-				ShopFileLocker.getReadLock().unlock();
+				ReadWriteFileLocker.getReadLock().unlock();
 			}
 		} else {
 			throw new InvalidParameterException(
@@ -204,7 +202,7 @@ public final class ProductAction extends DispatchAction {
 				Product newProduct = productForm.getNewProduct();
 				Transformer transformer = addProductTemplates.newTransformer();
 				setParametersForSaving(transformer, newProduct);
-				ShopFileLocker.getWriteLock().lock();
+				ReadWriteFileLocker.getWriteLock().lock();
 				try {
 					Source sourceDocument = new JDOMSource(document);
 					JDOMResult resultDocument = new JDOMResult();
@@ -216,18 +214,18 @@ public final class ProductAction extends DispatchAction {
 					targetFileOS.close();
 					document = new SAXBuilder().build(filePath);
 				} finally {
-					ShopFileLocker.getWriteLock().unlock();
+					ReadWriteFileLocker.getWriteLock().unlock();
 				}
 			} catch (TransformerException ex) {
 				logger.error(ex.getMessage());
 				return mapping.findForward(ERROR);
 			}
 		}
-		ShopFileLocker.getReadLock().lock();
+		ReadWriteFileLocker.getReadLock().lock();
 		try {
 			productForm.setDocument(document);
 		} finally {
-			ShopFileLocker.getReadLock().unlock();
+			ReadWriteFileLocker.getReadLock().unlock();
 		}
 		String path = String.format(SHOW_PRODUCTS_REDIRECT, categoryIndex,
 				subcategoryIndex);
@@ -261,6 +259,7 @@ public final class ProductAction extends DispatchAction {
 
 	private void setParametersForSaving(Transformer transformer,
 			Product newProduct) {
+		System.out.println(newProduct);
 		transformer.setParameter(CATEGORY_NAME, newProduct.getCategory());
 		transformer.setParameter(SUBCATEGORY_NAME, newProduct.getSubcategory());
 		transformer.setParameter(NAME, newProduct.getName());

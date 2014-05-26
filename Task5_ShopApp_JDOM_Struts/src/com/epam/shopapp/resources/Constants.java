@@ -1,7 +1,7 @@
 package com.epam.shopapp.resources;
 
 public class Constants {
-	public static final String ADD_PRODUCT_XSL = "WEB-INF/resources/xsl/add-product.xsl";
+	public static final String ADD_PRODUCT_XSL = "WEB-INF/xsl/add-product.xsl";
 	public static final String SHOP_FILE_NAMESPACE = "urn:shopapp:goods";
 	
 	public static final String CATEGORIES = "categories";

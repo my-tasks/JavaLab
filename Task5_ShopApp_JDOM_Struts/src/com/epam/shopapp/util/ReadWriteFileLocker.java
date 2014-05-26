@@ -2,10 +2,10 @@ package com.epam.shopapp.util;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class ShopFileLocker extends ReentrantReadWriteLock {
+public class ReadWriteFileLocker extends ReentrantReadWriteLock {
 	private static final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
-	private ShopFileLocker(){
+	private ReadWriteFileLocker(){
 	}
 	
 	public static ReadLock getReadLock() {

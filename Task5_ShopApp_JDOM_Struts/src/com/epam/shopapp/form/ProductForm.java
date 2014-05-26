@@ -1,21 +1,22 @@
 package com.epam.shopapp.form;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
 import com.epam.shopapp.model.Product;
-import com.epam.shopapp.resources.Constants;
 import com.epam.shopapp.util.FormValidator;
 
 public final class ProductForm extends ActionForm {
+	private static final long serialVersionUID = 1L;
 	private Document document;
 	private Product newProduct;
 	private Integer categoryIndex;
@@ -26,7 +27,6 @@ public final class ProductForm extends ActionForm {
 
 	public ProductForm() {
 		super();
-		System.out.println(">>>>>  +++ NEW FORM +++  <<<<<");
 	}
 
 	public Document getDocument() {
@@ -80,7 +80,6 @@ public final class ProductForm extends ActionForm {
 		this.subcategoryName = subcategoryName;
 	}
 
-
 	public Integer[] getSelectedNotInStock() {
 		return selectedNotInStock;
 	}
@@ -91,44 +90,23 @@ public final class ProductForm extends ActionForm {
 
 	@Override
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
-		System.out.println(">>>>   FORM RESET   <<<<");
 		selectedNotInStock = new Integer[0];
+		newProduct = null;
 	}
 
 	@Override
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request) {
-		ActionErrors errors = new ActionErrors();
-		System.out.println("validation");
 		if (newProduct != null) {
-			if (newProduct.getName().trim().isEmpty()) {
-				errors.add("name", new ActionMessage("errors.empty.field"));
-			}
-			if (newProduct.getProducer().trim().isEmpty()) {
-				errors.add("producer", new ActionMessage("errors.empty.field"));
-			}
-			if (newProduct.getModel().trim().isEmpty()) {
-				errors.add("model", new ActionMessage("errors.empty.field"));
-			} else if (!FormValidator.isValidModel(newProduct.getModel())) {
-				errors.add("model", new ActionMessage(
-						"errors.incorrect.format", Constants.MODEL_FORMAT));
-			}
-			if (newProduct.getDateOfIssue().trim().isEmpty()) {
-				errors.add("date", new ActionMessage("errors.empty.field"));
-			} else if (!FormValidator.isValidDate(newProduct.getDateOfIssue())) {
-				errors.add("date", new ActionMessage("errors.incorrect.format",
-						Constants.DATE_FORMAT));
-			}
-			if (newProduct.getColor().trim().isEmpty()) {
-				errors.add("color", new ActionMessage("errors.empty.color"));
-			}
-			if (!newProduct.isNotInStock()) {
-				if (newProduct.getPrice() == null || newProduct.getPrice() == 0) {
-					errors.add("price", new ActionMessage("errors.empty.field"));
-				}
-			}
+			return FormValidator.validateNewProduct(newProduct);
+		} else if (document != null) {
+			List<Element> products = document.getRootElement().getChildren()
+					.get(categoryIndex).getChildren().get(subcategoryIndex)
+					.getChildren();
+			return FormValidator.validateProductsUpdated(products,
+					new ArrayList<Integer>(Arrays.asList(selectedNotInStock)));
+		} else {
+			return new ActionErrors();
 		}
-		System.out.println(Arrays.toString(selectedNotInStock));
-		return errors;
 	}
 }

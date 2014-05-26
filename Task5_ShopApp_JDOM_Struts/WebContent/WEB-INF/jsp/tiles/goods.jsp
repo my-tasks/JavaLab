@@ -7,7 +7,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<html:form action="/update" method="post" onsubmit="return validateProducts()">
+<html:form action="/update" method="post" onsubmit="return validateProducts()" >
 	<html:hidden property="method" styleId="method" value="update"/>
 	<html:hidden property="categoryIndex" styleId="categoryIndex" value="${productForm.categoryIndex}"/>
 	<html:hidden property="subcategoryIndex" styleId="subcategoryIndex"  value="${productForm.subcategoryIndex}"/>
@@ -26,7 +26,7 @@
 			<th><bean:message key="product.not.in.stock"/></th>
 		</tr>
 		<tr>
-			<td colspan="7" class="common_error"><html:errors property="update"/></td>
+			<td colspan="7" class="common-error"><html:errors property="common_error"/></td>
 		</tr>
 		<nested:iterate property="children[${productForm.subcategoryIndex}].children" indexId="ind">
 			<tr>

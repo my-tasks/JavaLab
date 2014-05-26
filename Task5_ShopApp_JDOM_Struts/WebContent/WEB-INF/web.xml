@@ -22,7 +22,7 @@
     <servlet-class>com.epam.shopapp.util.ContextPathLoader</servlet-class>
     <init-param>
       <param-name>goods-file</param-name>
-      <param-value>WEB-INF/resources/xml/test.xml</param-value>
+      <param-value>WEB-INF/xml/test.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>

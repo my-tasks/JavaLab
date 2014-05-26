@@ -15,7 +15,7 @@
 	<nested:iterate name="productForm" property="document.rootElement.children[${productForm.categoryIndex}].children" indexId="index">
 		<tr>
 			<td class='category'>
-				<html:link styleClass="list" action="/list.do?method=showProducts&categoryIndex=${productForm.categoryIndex}" 
+				<html:link styleClass="list" action="/update.do?method=showProducts&categoryIndex=${productForm.categoryIndex}" 
 					paramId="subcategoryIndex" paramName="index"> 
 						<nested:write property="attributes[0].value" />
 				</html:link> 

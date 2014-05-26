@@ -12,19 +12,19 @@
 			<form-property name="categoryName" type="java.lang.String" />
 			<form-property name="currSubcategory" type="java.lang.String" />
 			<form-property name="newProduct" type="com.epam.shopapp.model.Product" />
-			
+
 		</form-bean>
 	</form-beans>
-	<!-- <global-exceptions> -->
-	<!-- <exception type="javax.servlet.ServletException" key="errors.unknown" -->
-	<!-- path="error" /> -->
-	<!-- <exception type="java.io.IOException" key="errors.unknown" -->
-	<!-- path="error" /> -->
-	<!-- <exception type="java.lang.NoSuchMethodException" key="errors.404" -->
-	<!-- path="error" /> -->
-	<!-- <exception type="com.epam.testapp.exception.DoubleRequestException" -->
-	<!-- key="errors.news.already.saved" path="error" /> -->
-	<!-- </global-exceptions> -->
+	<global-exceptions>
+		<exception type="javax.servlet.ServletException" key="errors.unknown"
+			path="error" />
+		<!-- <exception type="java.io.IOException" key="errors.unknown" -->
+		<!-- path="error" /> -->
+		<!-- <exception type="java.lang.NoSuchMethodException" key="errors.404" -->
+		<!-- path="error" /> -->
+		<!-- <exception type="com.epam.testapp.exception.DoubleRequestException" -->
+		<!-- key="errors.news.already.saved" path="error" /> -->
+	</global-exceptions>
 
 	<global-forwards>
 		<forward name="showCategories" path="category" />
@@ -32,16 +32,15 @@
 		<forward name="showProducts" path="goods" />
 		<forward name="addProduct" path="add" />
 		<forward name="error" path="error" />
-		<forward name="empty" path="empty" />
 	</global-forwards>
 
 	<action-mappings>
 
 		<action path="/list" type="com.epam.shopapp.action.ProductAction"
-			name="productForm" validate="false" scope="session" parameter="method">
+			name="productForm" validate="false" scope="request" parameter="method">
 		</action>
 		<action path="/update" type="com.epam.shopapp.action.ProductAction"
-			name="productForm" validate="true" input="add" scope="session"
+			name="productForm" validate="true" input="goods" scope="session"
 			parameter="method">
 		</action>
 		<action path="/add" type="com.epam.shopapp.action.ProductAction"
@@ -55,7 +54,7 @@
 
 	<controller processorClass="org.apache.struts.tiles.TilesRequestProcessor" />
 	<message-resources parameter="com.epam.shopapp.resources.messages"
-	key="org.apache.struts.action.MESSAGE" null="false" />
+		key="org.apache.struts.action.MESSAGE" null="false" />
 
 	<plug-in className="org.apache.struts.tiles.TilesPlugin">
 		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
