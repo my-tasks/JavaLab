@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+<tiles-definitions>
+	<definition name="header" path="/WEB-INF/jsp/tiles/header.jsp" />
+	<definition name="menu" path="/WEB-INF/jsp/tiles/menu.jsp" />
+	<definition name="footer" path="/WEB-INF/jsp/tiles/footer.jsp" />
+
+	<definition name="list" path="/WEB-INF/jsp/layout.jsp">
+		<put name="title" value="title.list" type="string" />
+		<put name="header" value="header" type="definition" />
+		<put name="menu" value="menu" type="definition" />
+		<put name="body" value="/WEB-INF/jsp/tiles/list.jsp" type="page" />
+		<put name="footer" value="footer" type="definition" />
+	</definition>
+	<definition name="view" extends="list">
+		<put name="title" value="title.view" type="string" />
+		<put name="body" value="/WEB-INF/jsp/tiles/view.jsp" type="page" />
+	</definition>
+	<definition name="edit" extends="list">
+		<put name="title" value="title.edit" type="string" />
+		<put name="body" value="/WEB-INF/jsp/tiles/edit.jsp" type="page" />
+	</definition>
+	<definition name="error" extends="list">
+		<put name="title" value="title.error" type="string" />
+		<put name="body" value="/WEB-INF/jsp/tiles/error.jsp" type="page" />
+	</definition>
+	<definition name="nonews" extends="list">
+		<put name="title" value="title.nonews" type="string" />
+		<put name="body" value="/WEB-INF/jsp/tiles/nonews.jsp" type="page" />
+	</definition>
+</tiles-definitions>

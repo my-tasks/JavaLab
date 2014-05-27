@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Task1_2_NewsApp_JDBC_Hib_JPA">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="java-output-path" value="/Task1_2_NewsApp_JDBC_Hib_JPA/build/classes"/>
+        <property name="context-root" value="Task1_2_NewsApp_JDBC_Hib_JPA"/>
+    </wb-module>
+</project-modules>

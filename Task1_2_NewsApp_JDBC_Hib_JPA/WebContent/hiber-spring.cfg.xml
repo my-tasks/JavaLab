@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="hibernate.cache.use_second_level_cache">false</property>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1522:newsdb</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">pass</property>
+		<property name="hibernate.connection.autocommit">false</property>
+		<property name="hibernate.connection.pool_size">50</property>
+
+		<property name="hibernate.connection.isolation">2</property>
+		<property name="hibernate.show_sql">true</property>
+
+		<mapping resource="com/epam/testapp/model/News.hbm.xml" />
+	</session-factory>
+
+</hibernate-configuration>

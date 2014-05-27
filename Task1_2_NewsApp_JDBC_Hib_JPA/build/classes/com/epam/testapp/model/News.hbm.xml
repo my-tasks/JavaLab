@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.epam.testapp.model">
+	<class name="News" table="NEWS">
+		<id name="id" column="NEWS_ID" type="integer" access="field">
+			<generator class="increment" />
+		</id>
+		<property name="title" type="string" length="100" not-null="true"
+			column="NEWS_TITLE" />
+		<property name="brief" type="text" length="500" not-null="true"
+			column="NEWS_BRIEF" />
+		<property name="content" type="text" length="2048" not-null="true"
+			column="NEWS_CONTENT" />
+		<property name="date" type="date" not-null="true" column="NEWS_DATE" />
+	</class>
+	<query name="getNewsList"><![CDATA[
+			from News n order by n.date DESC, n.id DESC
+	]]></query>
+	<query name="deleteNewsList"><![CDATA[
+		DELETE FROM News WHERE id IN (:id)
+	]]></query>
+</hibernate-mapping>
